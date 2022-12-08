@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import{ Booking } from "../booking";
+import { Bookings } from "../mock-bookings";
 
 @Component({
   selector: 'app-bookings',
@@ -9,7 +11,8 @@ export class BookingsComponent {
 
   constructor() { }
 
-  booking = 'Jannick';
+  bookings = Bookings;
+
 
   ngOnInit(): void {
 
