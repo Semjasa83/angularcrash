@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { CreateBookingComponent } from './create-booking/create-booking.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     BookingsComponent,
-    CreateBookingComponent
+    CreateBookingComponent,
   ],
   imports: [
     BrowserModule,
