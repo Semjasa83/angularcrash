@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Booking } from '../booking';
 import { Bookings } from '../mock-bookings';
+import { Router, ActivatedRoute  } from "@angular/router"; //activatedRoute to get ID from 2way Binding
+
 @Component({
   selector: 'app-create-booking',
   templateUrl: './create-booking.component.html',
   styleUrls: ['./create-booking.component.css']
 })
 
-export class CreateBookingComponent {
+export class CreateBookingComponent implements OnInit { /*onInit to get ID from activated Route*/
 
-  constructor() {}
+  constructor( private router: Router, private activatedRoute: ActivatedRoute ) {
+
+  }
 
   booking: Booking = {
     id: 100,
@@ -21,6 +25,18 @@ export class CreateBookingComponent {
 
   ngOnInit(): void {
 
+    if (this.router.url != '/create') { /*if not '/create' get id from route*/
+      let id = Number(this.activatedRoute.snapshot.paramMap.get('id')); /*Number for type Var*/
+      let bookingById = Bookings.find(x => x.id == id)!; /* x could be booking etc.*/
+      /* '!' not null operator - gibt nie null aus */
+      this.booking = bookingById;
+    }
+
   }
 
+
+  save() {
+    Bookings.push(this.booking);
+    this.router.navigate(['bookings']) /*routes to bookings*/
+  }
 }

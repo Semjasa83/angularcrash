@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { CreateBookingComponent } from './create-booking/create-booking.component';
 
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CreateBookingComponent } from './create-booking/create-booking.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
