@@ -13,9 +13,12 @@ export class BookingsComponent {
 
   bookings = Bookings;
 
-
   ngOnInit(): void {
+  }
 
+  deleteBooking(booking: Booking): void {
+    let index = Bookings.indexOf(booking);
+    Bookings.splice(index,1); /*delete only on temporary*/
   }
 
 }
