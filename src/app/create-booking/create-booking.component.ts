@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Booking } from '../booking';
-import { Bookings } from '../mock-bookings';
-import { Router, ActivatedRoute  } from "@angular/router"; //activatedRoute to get ID from 2way Binding
+import { Router, ActivatedRoute  } from "@angular/router";
+import { BookingService } from "../booking.service"; //activatedRoute to get ID from 2way Binding
 
 @Component({
   selector: 'app-create-booking',
@@ -11,7 +11,7 @@ import { Router, ActivatedRoute  } from "@angular/router"; //activatedRoute to g
 
 export class CreateBookingComponent implements OnInit { /*onInit to get ID from activated Route*/
 
-  constructor( private router: Router, private activatedRoute: ActivatedRoute ) {
+  constructor( private router: Router, private activatedRoute: ActivatedRoute, private bookingService: BookingService) {
 
   }
 
@@ -26,25 +26,20 @@ export class CreateBookingComponent implements OnInit { /*onInit to get ID from 
   ngOnInit(): void {
     if (this.router.url != '/create') { /*if not '/create' get id from route*/
       let id = Number(this.activatedRoute.snapshot.paramMap.get('id')); /*Number for type Var*/
-      let bookingById = Bookings.find(x => x.id == id)!; /* x could be booking etc.*/
-      /* '!' not null operator - gibt nie null aus */
+      let bookingById = this.bookingService.getBookingById(id);
       this.booking = bookingById;
     }
   }
 
   save() {
-    let bookingById = Bookings.find(x => x.id == this.booking.id)!; //damit bookings nicht doppelt ausgegeben werden
+    let bookingById = this.bookingService.getBookingById(this.booking.id); //damit bookings nicht doppelt ausgegeben werden
 
     if (bookingById == null || bookingById == undefined) {
-      Bookings.push(this.booking);
+      this.bookingService.addBooking(this.booking);
     } else {
-      bookingById = this.booking;
+      this.bookingService.updateBooking(this.booking);
     }
     this.router.navigate(['bookings']) /*routes to bookings*/
-  }
-
-  delete() {
-
   }
 
   dateChanged(event: Event, isStart: boolean){ /*event from html DOM*/
