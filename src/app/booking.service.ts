@@ -25,18 +25,16 @@ export class BookingService {
     return response;
   }
 
-  getBookingById(id: number) : Booking {
-    let bookingById = Bookings.find(x => x.id == id)!; /* x could be booking etc.*/
+  getBookingById(id: number) : Observable<Booking> {
+    let response = this.httpClient.get<Booking>(this.bookingsUrl + "/" + id);
+    /*let bookingById = Bookings.find(x => x.id == id)!;  x could be booking etc.*/
     /* '!' not null operator - gibt nie null aus */
-    return bookingById;
+    return response
   }
 
-  addBooking(booking: Booking) : void {
-    Bookings.push(booking);
+  addBooking(booking: Booking) : Observable<Booking> {
+    let response = this.httpClient.post<Booking>(this.bookingsUrl, booking);
+    return response;
   }
 
-  updateBooking(booking: Booking) : void {
-    let currentBooking = this.getBookingById(booking.id);
-    currentBooking = booking;
-  }
 }
