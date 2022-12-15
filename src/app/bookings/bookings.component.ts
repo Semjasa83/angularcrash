@@ -15,10 +15,14 @@ export class BookingsComponent {
   bookings : Booking[] = []; //Initalisierung Array
 
   ngOnInit(): void {
-    this.bookings = this.bookingService.getBookings();
+    this.bookingService.getBookings().subscribe((result) => {
+      console.log('result',result);
+      this.bookings = result;
+    });
   }
 
-  deleteBooking(booking: Booking) : void { //function from html!!! - rename at the end
-    this.bookingService.deleteBooking(booking); //function from service
+  deleteBooking(booking: Booking) : void {
+    this.bookingService.deleteBooking(booking).subscribe();
+    this.bookings = this.bookings.filter(b => b != booking);
   }
 }
