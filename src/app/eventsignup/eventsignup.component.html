@@ -1,0 +1,42 @@
+<!--Template Form Validation-->
+
+
+<form #formSignup="ngForm"> <!--#from für Zuordnung des Buttons zum Formular-->
+<!--  <div [class.bg-danger]="formSignup.invalid" [class.bg-dark]="formSignup.valid" class="card text-white">-->
+  <div class="card text-white">
+    <div class="card-header">
+      <h5>Event Benachrichtung</h5>
+    </div>
+    <div class="card-body">
+      <div class="row mb-2">
+        <div class="col">
+          <!--name wird benötigt
+          // [()] bezug auf variable in .TS
+          // minlength von Angular für Mindestzeichenlänge
+          // email von Angular, für gültiges Emailformat
+           -->
+          <input #inputEmail='ngModel' minlength="8" email name="signupMail" [(ngModel)]='signupMail' required
+                 class="form-control"
+                 placeholder="Bitte Email Adresse eintragen!">
+        </div>
+      </div>
+      <div *ngIf="inputEmail.invalid && (inputEmail.touched || inputEmail.dirty)" class="row mb-2"> <!--.invalid for email input-->
+        <div class="col">
+          <div *ngIf="inputEmail.errors?.required" class="alert alert-danger"> <!--email erforderlich Meldung-->
+            E-Mail Adresse ist erforderlich.
+          </div>
+          <div *ngIf="inputEmail.errors?.minlength" class="alert alert-danger"> <!--email Länge bis 8 Zeichen Fehlermeldung-->
+            Es sind mindestens 8 Zeichen notwendig.
+          </div>
+          <div *ngIf="inputEmail.errors?.email && !inputEmail.hasError('minlength')" class="alert alert-danger">
+            Das ist keine gültige Email Adresse.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button [disabled]="formSignup.invalid" (click)="onSubmit()" class="btn btn-primary">Eintragen</button>
+      <!--attribut mit boolean zum formular-->
+    </div>
+  </div>
+</form>

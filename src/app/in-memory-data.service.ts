@@ -11,7 +11,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const bookings: Booking [] = [
       {
         id: 1,
-        name: "Jannick Leismann",
+        name: "John Doe",
         roomNumber: 100,
         startDate: new Date(),
         endDate: new Date('2021-07-21')
