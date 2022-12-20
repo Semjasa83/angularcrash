@@ -1,21 +1,21 @@
 <div class="card">
-
   <div class="card-header">
     <h5>Create new Booking</h5>
   </div>
+  <form [formGroup]="bookingForm" (ngSubmit)="save()">
+    <div class="card-body">
 
-  <div class="card-body">
-    <form>
       <div class="row mb-2">
         <div class="col">
           <!--id-->
           <label class="form-label">ID</label>
-          <input type="number" [(ngModel)]="booking.id" name="id" class="form-control" />
+          <input type="number" formControlName="id" class="form-control"/>
         </div>
         <div class="col">
           <!--roomnumber-->
           <label class="form-label">Room Number</label>
-          <input type="number" [(ngModel)]="booking.roomNumber" name="roomNumber" class="form-control" /> <!--name Tag needed for ngModel-->
+          <input type="number" formControlName="roomNumber" class="form-control"/>
+          <!--name Tag needed for ngModel-->
         </div>
       </div>
 
@@ -23,7 +23,7 @@
         <div class="col-4">
           <!--name-->
           <label class="form-label">Guest Name</label>
-          <input type="text" [(ngModel)]="booking.name" name="name" class="form-control" />
+          <input type="text" formControlName="name" class="form-control"/>
         </div>
       </div>
 
@@ -31,21 +31,22 @@
         <div class="col">
           <!--startdate-->
           <label class="form-label">Start Date</label>
-          <input type="date" [value]="booking.startDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, true)" class="form-control" />
+          <input type="date" formControlName="startDate" [value]="booking.startDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, true)"
+                 class="form-control"/>
         </div>
         <div class="col">
           <!--enddate-->
           <label class="form-label">End Date</label>
-          <input type="date" [value]="booking.endDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, false)" class="form-control" />
-        <!-- | date: .... damit Datum im Input angezeigt wird bei der Kalenderwahl-->
+          <input type="date" formControlName="endDate" [value]="booking.endDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, false)"
+                 class="form-control"/>
+          <!-- | date: .... damit Datum im Input angezeigt wird bei der Kalenderwahl-->
         </div>
       </div>
-    </form>
-  </div>
-
-  <div class="card-footer">
-    <button (click)= "save()" class="btn btn-primary">Submit</button>
-  </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
 </div>
 
 
