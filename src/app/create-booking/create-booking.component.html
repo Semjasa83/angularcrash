@@ -24,26 +24,38 @@
           <!--name-->
           <label class="form-label">Guest Name</label>
           <input type="text" formControlName="name" class="form-control"/>
+          <!--Alert with NgIF-->
+          <!--<label *ngIf="bookingForm.get('name')?.hasError('minlength')" class="text-warning">Der Name ist zu
+            kurz!</label>-->
         </div>
+      </div>
+
+      <div class="row mb-2">
+          <div class="col-4">
+            <div *ngIf="bookingForm.get('name')?.hasError('minlength')" class="text-danger">*Der Name ist zu
+              kurz!</div>
+          </div>
       </div>
 
       <div class="row">
         <div class="col">
           <!--startdate-->
           <label class="form-label">Start Date</label>
-          <input type="date" formControlName="startDate" [value]="booking.startDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, true)"
+          <input type="date" formControlName="startDate" [value]="booking.startDate | date:'yyyy-MM-dd'"
+                 (input)="dateChanged($event, true)"
                  class="form-control"/>
         </div>
         <div class="col">
           <!--enddate-->
           <label class="form-label">End Date</label>
-          <input type="date" formControlName="endDate" [value]="booking.endDate | date:'yyyy-MM-dd'" (input)="dateChanged($event, false)"
+          <input type="date" formControlName="endDate" [value]="booking.endDate | date:'yyyy-MM-dd'"
+                 (input)="dateChanged($event, false)"
                  class="form-control"/>
           <!-- | date: .... damit Datum im Input angezeigt wird bei der Kalenderwahl-->
         </div>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button [disabled]="bookingForm.invalid" type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </form>

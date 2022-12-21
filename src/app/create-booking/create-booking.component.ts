@@ -31,7 +31,8 @@ export class CreateBookingComponent implements OnInit { /*onInit to get ID from 
 
   bookingForm: FormGroup = this.formbuilder.group({ //!!!! important!!!! TYPE: FormGroup !!!!!!!
     id: ['', Validators.required],
-    name: ['', Validators.required],
+    name: ['', Validators.compose([Validators.required, Validators.minLength(5)
+    ])],
     roomNumber: ['', Validators.required],
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
